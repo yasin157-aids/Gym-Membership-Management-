@@ -1,0 +1,14 @@
+{% extends "base.html" %}{% block content %}
+<div class="page-header"><div><h1>Admin Dashboard</h1><p class="muted">Gym Membership Management Overview</p></div></div>
+<div class="grid cards">
+<div class="stat"><small>Total Members</small><strong>{{stats.members}}</strong></div><div class="stat"><small>Active Memberships</small><strong>{{stats.active}}</strong></div><div class="stat"><small>Expired Memberships</small><strong>{{stats.expired}}</strong></div><div class="stat"><small>Trainers</small><strong>{{stats.trainers}}</strong></div>
+</div>
+<div class="grid cards">
+<div class="stat money"><small>Total Revenue</small><strong>₹{{'%.0f'|format(stats.revenue)}}</strong></div><div class="stat money"><small>This Month</small><strong>₹{{'%.0f'|format(stats.month_revenue)}}</strong></div><div class="stat money"><small>This Year</small><strong>₹{{'%.0f'|format(stats.year_revenue)}}</strong></div><div class="stat"><small>Payment Transactions</small><strong>{{stats.payment_count}}</strong></div>
+</div>
+<div class="grid two"><section class="card"><h2>Recent Members</h2><table><tr><th>Name</th><th>Joined</th><th>Goal</th></tr>{% for r in recent %}<tr><td>{{r.name}}</td><td>{{r.join_date}}</td><td>{{r.fitness_goal}}</td></tr>{% else %}<tr><td colspan="3">No members.</td></tr>{% endfor %}</table></section>
+<section class="card"><h2>Membership Plans</h2><table><tr><th>Plan</th><th>Members</th></tr>{% for p in plans %}<tr><td>{{p.plan_name}}</td><td>{{p.total}}</td></tr>{% endfor %}</table></section></div>
+<section class="card"><h2>Recent Payments</h2><table><tr><th>Member</th><th>Amount</th><th>Date</th><th>Method</th></tr>{% for p in payments %}<tr><td>{{p.name}}</td><td>₹{{'%.0f'|format(p.amount)}}</td><td>{{p.payment_date}}</td><td>{{p.payment_method}}</td></tr>{% endfor %}</table></section>
+<div class="grid two"><section class="card"><h2>Expiring Soon</h2><table><tr><th>Member</th><th>Plan</th><th>Days Left</th></tr>{% for e in expiring %}<tr><td>{{e.name}}</td><td>{{e.plan_name}}</td><td>{{e.days_left}}</td></tr>{% else %}<tr><td colspan="3">None within 30 days.</td></tr>{% endfor %}</table></section>
+<section class="card"><h2>Fitness Goals</h2><table><tr><th>Goal</th><th>Members</th></tr>{% for g in goals %}<tr><td>{{g.fitness_goal}}</td><td>{{g.total}}</td></tr>{% endfor %}</table></section></div>
+{% endblock %}

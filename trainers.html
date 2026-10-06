@@ -1,0 +1,1 @@
+{% extends "base.html" %}{% block content %}<h1>Trainers</h1><section class="card"><table><tr><th>Name</th><th>Specialization</th><th>Phone</th><th>Email</th><th>Members</th></tr>{% for t in trainers %}<tr><td>{{t.name}}</td><td>{{t.specialization}}</td><td>{{t.phone}}</td><td>{{t.email}}</td><td>{{t.assigned}}</td></tr>{% endfor %}</table></section>{% endblock %}
